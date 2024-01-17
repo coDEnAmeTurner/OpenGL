@@ -26,8 +26,4 @@ D:\OpenGL\OpenGL\OpenGL\Mesh.h(100,43): warning C4267: 'argument': conversion fr
 D:\OpenGL\OpenGL\OpenGL\Model.h(142,20): warning C4018: '<': signed/unsigned mismatch
   (compiling source file 'Source.cpp')
   
-D:\OpenGL\OpenGL\OpenGL\Source.cpp(74,42): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\OpenGL\OpenGL\OpenGL\Source.cpp(75,45): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\OpenGL\OpenGL\OpenGL\Source.cpp(83,42): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\OpenGL\OpenGL\OpenGL\Source.cpp(84,45): warning C4305: 'argument': truncation from 'double' to 'float'
   OpenGL.vcxproj -> D:\OpenGL\OpenGL\x64\Debug\OpenGL.exe
