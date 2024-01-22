@@ -48,6 +48,7 @@ int main() {
 	}
 
 	glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 
     float cubeVertices[] = {
         // positions          // texture Coords
@@ -191,10 +192,13 @@ int main() {
 
     }
 
+    float near = 0.1f, far = 100.0f;
+
     Shader ourShader("vShader.vert", "fShader.frag");
     ourShader.use();
     ourShader.setInt("Image", 0);
-
+    ourShader.setFloat("near", near);
+    ourShader.setFloat("far", far);
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -207,29 +211,29 @@ int main() {
         ourShader.use();
         glm::mat4 model(1.0f);
         glm::mat4 view = camera.calculateView();
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600, near, far);
         ourShader.setMat4("view", view);
         ourShader.setMat4("projection", projection);
 
         //render cube 1
         glBindVertexArray(cubeVAO);
-        model = glm::translate(glm::vec3(0.0f, 0.25f, 0.0f));
+        model = glm::translate(glm::vec3(0.0f, 0.007, 0.0f));
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, metal);
+        glBindTexture(GL_TEXTURE_2D, marble);
         ourShader.setMat4("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
         //render cube 2
-        model = glm::translate(glm::vec3(2.0f, 0.25f, -2.0f));
+        model = glm::translate(glm::vec3(2.0f, 0.007, -2.0f));
         ourShader.setMat4("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
 
         //render plane
         glBindVertexArray(planeVAO);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+        model = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f));
         ourShader.setMat4("model", model);
-        glBindTexture(GL_TEXTURE_2D, marble);
+        glBindTexture(GL_TEXTURE_2D, metal);
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindVertexArray(0);
 
