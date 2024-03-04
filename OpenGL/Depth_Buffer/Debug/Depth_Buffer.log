@@ -1,0 +1,29 @@
+﻿  Source.cpp
+D:\OpenGL\OpenGL\Headers\Camera.h(52,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(80,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(81,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(85,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(86,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(88,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(89,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Mesh.h(100,43): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Model.h(142,20): warning C4018: '<': signed/unsigned mismatch
+  (compiling source file 'Source.cpp')
+  
+  Depth_Buffer.vcxproj -> D:\OpenGL\OpenGL\x64\Debug\Depth_Buffer.exe
