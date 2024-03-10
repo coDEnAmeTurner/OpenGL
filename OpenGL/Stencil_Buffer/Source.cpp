@@ -193,6 +193,7 @@ int main() {
         glEnable(GL_DEPTH_TEST);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         shader.use();
+        glStencilMask(0x00);
         shader.setMat4("view", camera.calculateView());
         shader.setMat4("projection", glm::perspective(45.0f, (float)buffer_width / buffer_height, 0.1f, 100.0f));        
         glBindVertexArray(planeVAO);
@@ -200,6 +201,7 @@ int main() {
         shader.setMat4("model", glm::translate(glm::vec3(0.0f, 0.0f, 0.0f)));
         glDrawArrays(GL_TRIANGLES, 0, sizeof(planeVertices) / sizeof(float));
 
+        glStencilMask(0xFF);
         glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
         glStencilFunc(GL_ALWAYS, 1, 0xFF);
         glBindVertexArray(cubeVAO);
@@ -217,7 +219,6 @@ int main() {
         singleColorShader.setMat4("view", camera.calculateView());
         singleColorShader.setMat4("projection", glm::perspective(45.0f, (float)buffer_width / buffer_height, 0.1f, 100.0f));
 
-        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
         glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
         glBindVertexArray(cubeVAO);
         singleColorShader.setMat4("model", glm::translate(glm::vec3(-1.0f, 0.1f, 0.5f)) * glm::scale(glm::vec3(1.05, 1.05, 1.05)));
