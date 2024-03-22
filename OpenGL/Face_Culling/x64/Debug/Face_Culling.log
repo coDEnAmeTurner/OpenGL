@@ -1,0 +1,23 @@
+﻿  Source.cpp
+D:\OpenGL\OpenGL\Headers\Camera.h(52,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(80,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(81,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(85,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(86,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(88,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(89,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source.cpp')
+  
+  Face_Culling.vcxproj -> D:\OpenGL\OpenGL\x64\Debug\Face_Culling.exe
