@@ -6,6 +6,7 @@
 #include <Shader.h>
 #include <Camera.h>
 #include <vector>
+#include <map>
 
 const unsigned int buffer_width = 800, buffer_height = 600;
 Camera camera;
@@ -104,7 +105,7 @@ int main() {
         -5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
          5.0f, -0.5f, -5.0f,  2.0f, 2.0f
     };
-    float grassVertices[] = {
+    float windowVertices[] = {
         -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
          0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
          0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
@@ -139,13 +140,13 @@ int main() {
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    GLuint grassVAO;
-    glGenVertexArrays(1, &grassVAO);
-    glBindVertexArray(grassVAO);
-    GLuint grassBuffer;
-    glGenBuffers(1, &grassBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, grassBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(grassVertices), grassVertices, GL_STATIC_DRAW);
+    GLuint windowVAO;
+    glGenVertexArrays(1, &windowVAO);
+    glBindVertexArray(windowVAO);
+    GLuint windowBuffer;
+    glGenBuffers(1, &windowBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, windowBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(windowVertices), windowVertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)0);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(sizeof(float) * 3));
@@ -200,23 +201,23 @@ int main() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glActiveTexture(0);
 
-    int grassWidth, grassHeight, grassComp;
-    unsigned char* grass = stbi_load("D:\\OpenGL\\OpenGL\\Textures\\grass.png", &grassWidth, &grassHeight, &grassComp, 0);
-    if (!grass) {
-        std::cout << "load marble texture failed" << std::endl;
-        stbi_image_free(grass);
+    int windowWidth, windowHeight, windowComp;
+    unsigned char* window_tex = stbi_load("D:\\OpenGL\\OpenGL\\Textures\\blending_transparent_window.png", &windowWidth, &windowHeight, &windowComp, 0);
+    if (!window_tex) {
+        std::cout << "load window texture failed" << std::endl;
+        stbi_image_free(window_tex);
     }
-    unsigned int grassTex;
-    glGenTextures(1, &grassTex);
+    unsigned int windowTex;
+    glGenTextures(1, &windowTex);
     glActiveTexture(GL_TEXTURE2);
-    glBindTexture(GL_TEXTURE_2D, grassTex);
-    if (grassComp == 1)
+    glBindTexture(GL_TEXTURE_2D, windowTex);
+    if (windowComp == 1)
         colorFormat = GL_RED;
-    if (grassComp == 4)
+    if (windowComp == 4)
         colorFormat = GL_RGBA;
-    glTexImage2D(GL_TEXTURE_2D, 0, colorFormat, grassWidth, grassHeight, 0, colorFormat, GL_UNSIGNED_BYTE, grass);
+    glTexImage2D(GL_TEXTURE_2D, 0, colorFormat, windowWidth, windowHeight, 0, colorFormat, GL_UNSIGNED_BYTE, window_tex);
     glGenerateMipmap(GL_TEXTURE_2D);
-    stbi_image_free(grass);
+    stbi_image_free(window_tex);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -229,12 +230,18 @@ int main() {
     cube_models.push_back(glm::translate(glm::vec3(0.0f, 0.0f, 0.0f)));
     cube_models.push_back(glm::translate(glm::vec3(2.0f, 0.1f, -2.5f)));
 
-    std::vector<glm::mat4> grass_models;
-    grass_models.push_back(glm::translate(glm::vec3(-1.5f, 0.0f, -0.48f)));
-    grass_models.push_back(glm::translate(glm::vec3(1.5f, 0.0f, 0.51f)));
-    grass_models.push_back(glm::translate(glm::vec3(0.0f, 0.0f, 0.7f)));
-    grass_models.push_back(glm::translate(glm::vec3(-0.3f, 0.0f, -2.3f)));
-    grass_models.push_back(glm::translate(glm::vec3(0.5f, 0.0f, -0.6f)));
+    std::vector<glm::vec3> window_poss;
+    window_poss.push_back(glm::vec3(-1.5f, 0.0f, -0.48f));
+    window_poss.push_back(glm::vec3(1.5f, 0.0f, 0.51f));
+    window_poss.push_back(glm::vec3(0.0f, 0.0f, 0.7f));
+    window_poss.push_back(glm::vec3(-0.3f, 0.0f, -2.3f));
+    window_poss.push_back(glm::vec3(1.5f, 0.0f, -0.6f));
+
+    std::map<float, glm::vec3> window_poss_sorted;
+    for (const glm::vec3& pos : window_poss) {
+        float distance = glm::length(-pos + camera.getCameraPos());
+        window_poss_sorted[distance] = pos;
+    }
 
 	while (!(glfwWindowShouldClose(window))) {
 		glfwPollEvents();
@@ -245,6 +252,7 @@ int main() {
 
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         shader.use();
         shader.setMat4("view", camera.calculateView());
@@ -262,16 +270,18 @@ int main() {
             glDrawArrays(GL_TRIANGLES, 0, sizeof(cubeVertices) / sizeof(float));
         }
 
-        glBindVertexArray(grassVAO);
+        glBindVertexArray(windowVAO);
         shader.setInt("texture", 2);
-        for (const glm::mat4& model : grass_models) {
-            shader.setMat4("model", model);
-            glDrawArrays(GL_TRIANGLES, 0, sizeof(grassVertices) / sizeof(float));
-        }
-
-
-
-
+        if (camera.getCameraDirection().z > 0)
+            for (std::map<float, glm::vec3>::iterator i = window_poss_sorted.begin(); i != window_poss_sorted.end(); i++) {
+                shader.setMat4("model", glm::translate(i->second));
+                glDrawArrays(GL_TRIANGLES, 0, sizeof(windowVertices) / sizeof(float));
+            }
+        else
+            for (std::map<float, glm::vec3>::reverse_iterator i = window_poss_sorted.rbegin(); i != window_poss_sorted.rend(); i++) {
+                shader.setMat4("model", glm::translate(i->second));
+                glDrawArrays(GL_TRIANGLES, 0, sizeof(windowVertices) / sizeof(float));
+            }
         shader.unuse();
 		glfwSwapBuffers(window);
 	}
