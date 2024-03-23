@@ -93,12 +93,12 @@ void DrawScene(Shader& shader) {
     glBindVertexArray(planeVAO);
     shader.setInt("texture", 1);
     shader.setMat4("model", glm::translate(glm::vec3(0, 0, 0)));
-    glDrawArrays(GL_TRIANGLES, 0, sizeof(planeVertices) / sizeof(float));
+    glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(cubeVAO);
     shader.setInt("texture", 0);
     for (const glm::mat4& model : cube_models) {
         shader.setMat4("model", model);
-        glDrawArrays(GL_TRIANGLES, 0, sizeof(cubeVertices) / sizeof(float));
+        glDrawArrays(GL_TRIANGLES, 0, 36);
     }
     shader.unuse();
 }
@@ -133,9 +133,6 @@ int main() {
 	}
 
 	glViewport(0, 0, buffer_width, buffer_height);
-    glEnable(GL_STENCIL_TEST);
-
-
 
     glGenVertexArrays(1, &cubeVAO);
     glBindVertexArray(cubeVAO);
@@ -238,8 +235,8 @@ int main() {
     glGenRenderbuffers(1, &rbo);
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, buffer_width, buffer_height);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, rbo);
 
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         std::cout << "ERROR::FRAMEBUFFER::Framebuffer is not complete!\n";
@@ -261,8 +258,8 @@ int main() {
 
         //first pass
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-        glEnable(GL_DEPTH_TEST);
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glEnable(GL_DEPTH_TEST);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         DrawScene(shader);
 
@@ -274,8 +271,9 @@ int main() {
         screen_shader.use();
         glBindVertexArray(quadVAO);
         glDisable(GL_DEPTH_TEST);
+        glDisable(GL_CULL_FACE);
         screen_shader.setInt("texture", 2);
-        glDrawArrays(GL_TRIANGLES, 0, sizeof(quadVertices) / sizeof(float));
+        glDrawArrays(GL_TRIANGLES, 0, 6);
         screen_shader.unuse();
 
 		glfwSwapBuffers(window);
