@@ -1,0 +1,31 @@
+﻿  Geometry_Shader_Source.cpp
+D:\OpenGL\OpenGL\Headers\Camera.h(52,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Geometry_Shader_Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(80,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Geometry_Shader_Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(81,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Geometry_Shader_Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(85,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Geometry_Shader_Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(86,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Geometry_Shader_Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(88,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Geometry_Shader_Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Camera.h(89,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Geometry_Shader_Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Mesh.h(100,43): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  (compiling source file 'Geometry_Shader_Source.cpp')
+  
+D:\OpenGL\OpenGL\Headers\Model.h(142,20): warning C4018: '<': signed/unsigned mismatch
+  (compiling source file 'Geometry_Shader_Source.cpp')
+  
+D:\OpenGL\OpenGL\Geometry_Shader\Geometry_Shader_Source.cpp(81,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\OpenGL\OpenGL\Geometry_Shader\Geometry_Shader_Source.cpp(89,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Geometry_Shader.vcxproj -> D:\OpenGL\OpenGL\x64\Debug\Geometry_Shader.exe
