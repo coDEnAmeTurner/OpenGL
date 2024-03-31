@@ -100,9 +100,9 @@ void Camera::calculateDirection(double xpos, double ypos)
 	if (pitch < -89.0f)
 		pitch = -89.0f;
 
-	cameraDirection.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	cameraDirection.y = sin(glm::radians(pitch));
-	cameraDirection.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	cameraDirection.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch)); //0, 0
+	cameraDirection.y = sin(glm::radians(pitch)); //0, 0
+	cameraDirection.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch)); //1, -1
 	cameraDirection = glm::normalize(cameraDirection);
 
 	//modified here
