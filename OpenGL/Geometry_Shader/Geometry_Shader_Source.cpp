@@ -78,7 +78,6 @@ int main() {
         shader.setMat4("projection", glm::perspective(45.0f, (float)buffer_width / buffer_height, 0.1f, 100.0f));
         shader.setMat4("model", glm::translate(glm::scale(glm::vec3(1, 1, 1)), glm::vec3(0, 0, 0)));
         shader.setMat4("view", camera.calculateView());
-        shader.setFloat("time", glfwGetTime());
         backpack.Draw(shader);
         shader.unuse();
 
@@ -86,7 +85,6 @@ int main() {
         normal_display_shader.setMat4("projection", glm::perspective(45.0f, (float)buffer_width / buffer_height, 0.1f, 100.0f));
         normal_display_shader.setMat4("model", glm::translate(glm::scale(glm::vec3(1, 1, 1)), glm::vec3(0, 0, 0)));
         normal_display_shader.setMat4("view", camera.calculateView());
-        normal_display_shader.setFloat("time", glfwGetTime());
         backpack.Draw(normal_display_shader);
         normal_display_shader.unuse();
 
